@@ -39,6 +39,7 @@
 #include "cinder/Exception.h"
 #include "poMatrixSet.h"
 #include "poEvents.h"
+#include <deque>
 
 namespace po { namespace scene {
     

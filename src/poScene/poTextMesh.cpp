@@ -63,7 +63,7 @@ namespace po { namespace scene {
   {
     ci::gl::enableAlphaBlending();
     ci::gl::color(ci::ColorA(getFillColor(), getAppliedAlpha()));
-    mSdfTextMesh->draw(true);
+    mSdfTextMesh->draw(false);
   }
   
   void TextMesh::setTextMesh(gl::SdfTextMeshRef &sdfTextMesh)

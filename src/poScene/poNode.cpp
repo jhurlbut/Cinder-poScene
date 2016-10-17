@@ -304,6 +304,7 @@ namespace po { namespace scene {
     
     ci::gl::TextureRef Node::createTexture()
     {
+		
         //	We have to be visible, so if we aren't temporarily turn it on
         bool visible = mVisible;
         setVisible(true);
@@ -314,7 +315,7 @@ namespace po { namespace scene {
         format.enableDepthBuffer(false);
         
         //	Create and Bind the FBO
-        ci::gl::FboRef fbo = ci::gl::Fbo::create((int)getWidth(), (int)getHeight(), format);
+		ci::gl::FboRef fbo = ci::gl::Fbo::create((int)getWidth(), (int)getHeight(), format);
         ci::gl::ScopedFramebuffer fboBind(fbo);
         
         //	Set the viewport
@@ -340,7 +341,44 @@ namespace po { namespace scene {
         return tex;
     }
 
-    
+	ci::gl::TextureRef Node::createScreenTexture()
+	{
+		
+		//	We have to be visible, so if we aren't temporarily turn it on
+		bool visible = mVisible;
+		setVisible(true);
+
+		// Create an FBO to draw into
+		ci::gl::Fbo::Format format;
+		format.setSamples(1);
+		format.enableDepthBuffer(true);
+
+		//	Create and Bind the FBO
+		ci::gl::FboRef fbo = ci::gl::Fbo::create((int)ci::app::getWindowWidth(), (int)ci::app::getWindowHeight(), format);
+		ci::gl::ScopedFramebuffer fboBind(fbo);
+
+		//	Set the viewport
+		ci::gl::ScopedViewport vp(ci::ivec2(0), fbo->getSize());
+
+		//	Set Ortho camera to fbo bounds, save matrices and push camera
+		ci::gl::pushMatrices();
+		ci::gl::setMatricesWindow(fbo->getWidth(), fbo->getHeight());
+
+		//	Clear the FBO
+		ci::gl::clear(ci::ColorA(1.f, 1.f, 1.f, 0.f));
+
+		//	Draw into the FBO
+		draw();
+
+		//	Set the camera up for the window
+		ci::gl::popMatrices();
+
+		//	Return to previous visibility
+		setVisible(visible);
+
+		ci::gl::TextureRef tex = fbo->getColorTexture();
+		return tex;
+	}
     //------------------------------------
     //	Attributes
 	//------------------------------------

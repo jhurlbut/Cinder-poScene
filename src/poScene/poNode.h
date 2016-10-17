@@ -389,7 +389,8 @@ namespace po { namespace scene {
   
         //! Create an FBO, draw this node (and it's entire hierarchy if applicable) into it, and return the texture
         ci::gl::TextureRef createTexture();
-        
+		ci::gl::TextureRef createScreenTexture();
+
         // Masking
         // Nodes can be masked to another node
         // The masking node can then be positioned, animated, etc.

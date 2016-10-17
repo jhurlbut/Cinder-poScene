@@ -59,7 +59,10 @@ namespace po { namespace scene {
     
     ci::Rectf Image::getBounds()
     {
-        return mTexture->getBounds();
+		if (mTexture) {
+			return mTexture->getBounds();
+		}
+		else return ci::Rectf(0, 0, 0, 0);
     }
     
 } } //  Namespace: po::scene

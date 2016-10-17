@@ -41,11 +41,13 @@ namespace po { namespace scene {
     NodeContainer::NodeContainer(std::string name)
     : Node(name)
     {
+		mBounds = ci::Rectf(0, 0, 0, 0);
     }
     
     NodeContainer::NodeContainer()
     : Node("")
     {
+		mBounds = ci::Rectf(0, 0, 0, 0);
     }
     
     NodeContainer::~NodeContainer()

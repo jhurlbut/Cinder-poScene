@@ -256,7 +256,7 @@ namespace po { namespace scene {
 
         //	Draw
         ci::gl::drawSolidRect(getScene()->getWindowFbo()->getBounds());
-        
+      
         ci::gl::popModelView();
     }
 	
@@ -311,7 +311,7 @@ namespace po { namespace scene {
         
         // Create an FBO to draw into
         ci::gl::Fbo::Format format;
-        format.setSamples(1);
+        format.setSamples(16);
         format.enableDepthBuffer(false);
         
         //	Create and Bind the FBO
@@ -350,7 +350,7 @@ namespace po { namespace scene {
 
 		// Create an FBO to draw into
 		ci::gl::Fbo::Format format;
-		format.setSamples(1);
+		format.setSamples(16);
 		format.enableDepthBuffer(true);
 
 		//	Create and Bind the FBO

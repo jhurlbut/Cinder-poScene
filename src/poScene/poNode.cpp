@@ -311,8 +311,8 @@ namespace po { namespace scene {
         
         // Create an FBO to draw into
         ci::gl::Fbo::Format format;
-        format.setSamples(16);
-        format.enableDepthBuffer(false);
+        //format.setSamples(16);
+        //format.enableDepthBuffer(false);
         
         //	Create and Bind the FBO
 		ci::gl::FboRef fbo = ci::gl::Fbo::create((int)getWidth(), (int)getHeight(), format);
@@ -350,8 +350,7 @@ namespace po { namespace scene {
 
 		// Create an FBO to draw into
 		ci::gl::Fbo::Format format;
-		format.setSamples(32);
-    format.setCoverageSamples(16);
+		format.setSamples(16);
 		format.enableDepthBuffer(true);
 
 		//	Create and Bind the FBO

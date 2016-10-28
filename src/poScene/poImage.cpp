@@ -56,7 +56,12 @@ namespace po { namespace scene {
             ci::gl::draw(mTexture);
         }
     }
-    
+		void Image::removeTexture()
+		{
+			if (mTexture) {
+				mTexture.reset();
+			}
+		}
     ci::Rectf Image::getBounds()
     {
 		if (mTexture) {

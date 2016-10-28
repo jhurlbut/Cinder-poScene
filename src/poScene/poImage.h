@@ -63,6 +63,9 @@ namespace po { namespace scene {
         //! Get the bounds of the Image
         ci::Rectf getBounds();
         
+				//! Remove the texture 
+				void removeTexture();
+
     protected:
         Image(ci::gl::TextureRef texture);
         

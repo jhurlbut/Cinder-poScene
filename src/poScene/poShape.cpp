@@ -71,7 +71,23 @@ namespace po { namespace scene {
         s->setCiShape2d(shape);
         return s;
     }
-	
+		ShapeRef Shape::createRect(float width, float height, float radtl,float radtr, float radbl, float radbr)
+		{
+
+			if (radtl > 0.f)
+				return createRoundedRect(width, height, radtl,radtr,radbl,radbr);
+
+			std::shared_ptr<Shape> s = std::shared_ptr<Shape>(new Shape());
+			ci::Shape2d shape;
+			shape.moveTo(0, 0);
+			shape.lineTo(width, 0);
+			shape.lineTo(width, height);
+			shape.lineTo(0, height);
+			shape.close();
+
+			s->setCiShape2d(shape);
+			return s;
+		}
 	//
 	//	Rounded Rect
 	//
@@ -112,7 +128,43 @@ namespace po { namespace scene {
 		return s;
 		
 	}
-	
+	ShapeRef Shape::createRoundedRect(float width, float height, float radtl, float radtr, float radbl, float radbr)
+	{
+		std::shared_ptr<Shape> s = std::shared_ptr<Shape>(new Shape());
+
+		// points
+		ci::vec2 p1(radtl, 0);
+		ci::vec2 p2(width - radtr, 0);
+		ci::vec2 p3(width, radtr);
+		ci::vec2 p4(width, height - radbr);
+		ci::vec2 p5(width - radbr, height);
+		ci::vec2 p6(radbl, height);
+		ci::vec2 p7(0, height - radbl);
+		ci::vec2 p8(0, radtl);
+
+		// tangents
+		ci::vec2 t1(width, 0);
+		ci::vec2 t2(width, height);
+		ci::vec2 t3(0, height);
+		ci::vec2 t4(0, 0);
+
+		ci::Shape2d shape;
+		shape.moveTo(p1);
+		shape.lineTo(p2);
+		shape.arcTo(p3, t1, radtr);
+		shape.lineTo(p4);
+		shape.arcTo(p5, t2, radbr);
+		shape.lineTo(p6);
+		shape.arcTo(p7, t3, radbl);
+		shape.lineTo(p8);
+		shape.arcTo(p1, t4, radtl);
+		shape.close();
+
+		s->setCiShape2d(shape);
+
+		return s;
+
+	}
 	
     ShapeRef Shape::createSquare(float size)
     {

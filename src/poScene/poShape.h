@@ -64,10 +64,10 @@ namespace po { namespace scene {
 		static ShapeRef create(ci::gl::TextureRef texture);
         //! Create a rectangular shape
 		static ShapeRef createRect(float width, float height, float rad=0.f);
-		
+		static ShapeRef createRect(float width, float height, float radtl, float radtr, float radbl, float radbr);
 		//! Create a rounded rect
 		static ShapeRef createRoundedRect(float width, float height, float rad);
-		
+		static ShapeRef createRoundedRect(float width, float height, float radtl, float radtr, float radbl, float radbr);
         //! Create an square shape
         static ShapeRef createSquare(float size);
         //! Create an elliptical shape
